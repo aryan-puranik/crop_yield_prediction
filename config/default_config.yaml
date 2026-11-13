@@ -1,0 +1,27 @@
+# Global Project Configuration
+project_name: "crop-yield-prediction"
+version: "0.1.0"
+random_seed: 42
+
+data:
+  raw_path: "data/raw/crop_yield_dataset.csv"
+  processed_dir: "data/processed"
+  interim_dir: "data/interim"
+  target_column: "Yield"
+  target_unit: "kg/ha"
+
+split:
+  strategy: "chronological"
+  train_years: [1966, 2011]
+  val_years: [2012, 2014]
+  test_years: [2015, 2017]
+
+evaluation:
+  primary_metric: "rmse"
+  secondary_metrics:
+    - "mae"
+    - "r2"
+    - "mse"
+
+logging:
+  level: "INFO"

@@ -1,0 +1,124 @@
+# Dataset Schema Configuration & Validation Constraints
+target_column: "Yield"
+time_column: "Year"
+
+expected_columns:
+  - "Year"
+  - "Region"
+  - "Crop"
+  - "Season"
+  - "Temperature"
+  - "Rainfall"
+  - "Humidity"
+  - "Soil Type"
+  - "pH"
+  - "Nitrogen"
+  - "Phosphorus"
+  - "Potassium"
+  - "Fertilizer"
+  - "Pesticide"
+  - "Yield"
+
+column_types:
+  Year: "int64"
+  Region: "string"
+  Crop: "string"
+  Season: "string"
+  Temperature: "float64"
+  Rainfall: "float64"
+  Humidity: "float64"
+  Soil Type: "string"
+  pH: "float64"
+  Nitrogen: "float64"
+  Phosphorus: "float64"
+  Potassium: "float64"
+  Fertilizer: "float64"
+  Pesticide: "float64"
+  Yield: "float64"
+
+categorical_features:
+  - "Region"
+  - "Crop"
+  - "Season"
+  - "Soil Type"
+
+numerical_features:
+  - "Temperature"
+  - "Rainfall"
+  - "Humidity"
+  - "pH"
+  - "Nitrogen"
+  - "Phosphorus"
+  - "Potassium"
+  - "Fertilizer"
+  - "Pesticide"
+
+bounds:
+  Year:
+    min: 1966
+    max: 2050
+  Temperature:
+    min: -15.0
+    max: 60.0
+  Rainfall:
+    min: 0.0
+    max: 15000.0
+  Humidity:
+    min: 0.0
+    max: 100.0
+  pH:
+    min: 3.0
+    max: 11.0
+  Nitrogen:
+    min: 0.0
+    max: 1000.0
+  Phosphorus:
+    min: 0.0
+    max: 1000.0
+  Potassium:
+    min: 0.0
+    max: 1000.0
+  Fertilizer:
+    min: 0.0
+    max: 3000.0
+  Pesticide:
+    min: 0.0
+    max: 20.0
+  Yield:
+    min: 0.0
+    max: 100000.0
+
+allowed_categories:
+  Season:
+    - "Kharif"
+    - "Rabi"
+    - "Whole Year"
+  Soil Type:
+    - "Alfisols"
+    - "Aridisols"
+    - "Entisols"
+    - "Inceptisols"
+    - "Mollisols"
+    - "Vertisols"
+  Crop:
+    - "Barley"
+    - "Castor"
+    - "Chickpea"
+    - "Cotton"
+    - "Finger Millet"
+    - "Groundnut"
+    - "Linseed"
+    - "Maize"
+    - "Minor Pulses"
+    - "Pearl Millet"
+    - "Pigeonpea"
+    - "Rapeseed & Mustard"
+    - "Rice"
+    - "Safflower"
+    - "Sesamum"
+    - "Sorghum (Kharif)"
+    - "Sorghum (Rabi)"
+    - "Soybean"
+    - "Sugarcane"
+    - "Sunflower"
+    - "Wheat"

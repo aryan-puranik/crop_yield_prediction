@@ -1,0 +1,10 @@
+# Agent Guidelines for Crop Yield Prediction Project
+
+- Notebook-First Research Workflow: Core research, EDA, outlier handling, feature engineering, feature selection experiments, model training, and evaluations must reside in `notebooks/` (`01_*.ipynb` through `09_*.ipynb`).
+- Keep reusable utilities in `src/` (`src/data`, `src/preprocessing`, `src/features`, `src/models`, `src/evaluation`) and import them into notebooks.
+- NEVER modify or overwrite `data/raw/crop_yield_dataset.csv`.
+- Adhere strictly to the phased development strategy. Implement ONLY the requested phase.
+- Ensure every feature selector adheres to the `fit(X, y)` and `transform(X)` contract.
+- Never fit feature selectors or scalers using validation or test datasets.
+- Test set (2015–2017) must remain completely untouched until final benchmark reporting.
+- Propose conventional commit messages and ask for user approval before committing or pushing changes to Git.
