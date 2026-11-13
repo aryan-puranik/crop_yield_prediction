@@ -1,0 +1,18 @@
+Metric,Value,Value_Formatted
+Observations,198369.0,"198,369.00"
+Mean (kg/ha),1239.2220693253482,"1,239.22"
+Std Deviation (kg/ha),1515.319790269533,"1,515.32"
+Median (kg/ha),800.0,800.00
+IQR (kg/ha),899.8299999999999,899.83
+Min (kg/ha),0.01,0.0100
+Max (kg/ha),58363.64,"58,363.64"
+Skewness (Raw),3.735160497379021,3.74
+Skewness (Log1p),-0.09939891271752878,-0.0994
+Kurtosis (Raw),26.381997693934938,26.38
+Kurtosis (Log1p),0.9600078680907028,0.9600
+1st Percentile,69.8836,69.88
+5th Percentile,166.67,166.67
+25th Percentile,448.0,448.00
+75th Percentile,1347.83,"1,347.83"
+95th Percentile,4066.891999999991,"4,066.89"
+99th Percentile,8179.963600000019,"8,179.96"

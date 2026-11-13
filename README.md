@@ -29,11 +29,14 @@ This project follows an academic, **notebook-first research workflow**:
   - **NASA POWER Agroclimatology:** Satellite and reanalysis meteorological parameters (temperature, precipitation, relative humidity).
   - **FAOSTAT:** National-level agricultural input aggregates (pesticide macro-consumption).
 
-### Key Audit Findings (from `notebooks/01_data_audit.ipynb`):
-1. **Multicollinearity:** Total `Fertilizer` is an exact mathematical sum of `Nitrogen + Phosphorus + Potassium` ($|\Delta| < 0.21$ in 100% of observations).
-2. **Pesticide Invariance:** Pesticide consumption reflects annual national macro-aggregates from FAOSTAT and is constant across all districts within any single year.
-3. **Crop Yield Heterogeneity:** Sugarcane yields (median $5,200\text{ kg/ha}$) differ by an order of magnitude from oilseeds/pulses (median $200\text{--}700\text{ kg/ha}$). Outlier handling must be crop-specific.
-4. **Logical Key Integrity:** The composite tuple `(Year, Region, Crop, Season)` uniquely identifies all 198,369 rows with zero duplicate keys.
+### Key Empirical Findings (from `notebooks/01_data_audit.ipynb` & `02_exploratory_data_analysis.ipynb`):
+1. **Target Skewness:** Raw yield has skewness of $+3.74$ (mean $1,239.22\text{ kg/ha}$ vs median $800.00\text{ kg/ha}$); $\log(y + 1)$ normalizes skewness to $-0.10$.
+2. **Crop Heterogeneity:** Sugarcane median yield ($5,200\text{ kg/ha}$) is $24\times$ higher than Cotton ($212.50\text{ kg/ha}$). Outlier treatment must be strictly crop-stratified.
+3. **Deterministic Seasonal Mapping:** `Season` has an exact 1-to-1 block-diagonal relationship with `Crop`. Seasonal yield differences reflect crop composition rather than independent climate effects.
+4. **Multicollinearity:** $\text{Fertilizer} \equiv \text{Nitrogen} + \text{Phosphorus} + \text{Potassium}$ across 100.00% of observations ($|\Delta| < 0.21\text{ kg/ha}$).
+5. **Pesticide Macro-Broadcast:** Exactly 16 discrete values; zero within-year variance across all 309 districts; highly correlated with Year ($r = -0.76$).
+6. **Non-Linear Agro-Climatology:** Pooled linear correlation of rainfall/temperature with yield is near zero ($r \approx 0$), but crop-stratified binned responses reveal pronounced biological optima.
+7. **Green Revolution Non-Stationarity:** Major cereals (Wheat and Rice) experienced $>300\%$ yield growth from 1966 to 2017, confirming the necessity of chronological out-of-time evaluation.
 
 ---
 
@@ -50,9 +53,9 @@ crop_yield_prediction/
 │   ├── processed/              # Processed datasets (generated during experiments)
 │   └── interim/                # Temporary transformed partitions
 ├── notebooks/                  # Primary Research Environment (Jupyter Notebooks)
-│   ├── 01_data_audit.ipynb     # Executed audit, schema integrity, and initial findings
-│   ├── 02_exploratory_data_analysis.ipynb   # (Phase 2)
-│   ├── 03_outlier_analysis.ipynb            # (Phase 3)
+│   ├── 01_data_audit.ipynb     # Completed: Data audit, schema integrity, and initial findings
+│   ├── 02_exploratory_data_analysis.ipynb   # Completed: 20-section comprehensive EDA
+│   ├── 03_outlier_analysis.ipynb            # (Phase 3 - Up Next)
 │   ├── 04_preprocessing.ipynb               # (Phase 4)
 │   ├── 05_feature_engineering.ipynb         # (Phase 5)
 │   ├── 06_feature_selection.ipynb           # (Phase 6)
@@ -77,8 +80,10 @@ crop_yield_prediction/
 │   ├── test_schema_validation.py
 │   ├── test_splits.py
 │   └── test_interfaces.py
-├── reports/                    # Methodological notes & governance documentation
-│   └── methodological_risks.md
+├── reports/
+│   ├── figures/eda/            # 20 publication-grade figures from Phase 2 EDA
+│   ├── tables/eda/             # 16 reproducible statistical CSV tables from Phase 2 EDA
+│   └── methodological_risks.md # Methodological notes & governance documentation
 ├── experiments/                # Persistent experiment records & artifacts
 ├── artifacts/                  # Serialized pipelines and model metadata
 ├── app/                        # Streamlit web application (Phase 9)
@@ -127,8 +132,8 @@ pip install -r requirements.txt
 ### Launching Jupyter
 ```bash
 jupyter notebook notebooks/
-# Or launch the data audit directly:
-jupyter notebook notebooks/01_data_audit.ipynb
+# Launch the EDA notebook directly:
+jupyter notebook notebooks/02_exploratory_data_analysis.ipynb
 ```
 
 ### Running Automated Tests
@@ -142,9 +147,9 @@ Current test status: **12 passed**.
 
 ## 6. Phased Implementation Roadmap
 
-- **Phase 1: Project Initialization & Notebook-First Architecture** *(Completed - `01_data_audit.ipynb`)*
-- **Phase 2: Exploratory Data Analysis (EDA)** *(Up Next - `02_exploratory_data_analysis.ipynb`)*
-- **Phase 3: Outlier Handling & Robustness Analysis** *(`03_outlier_analysis.ipynb`)*
+- **Phase 1: Project Initialization & Notebook Data Audit** *(Completed - `01_data_audit.ipynb`)*
+- **Phase 2: Comprehensive Exploratory Data Analysis** *(Completed - `02_exploratory_data_analysis.ipynb`)*
+- **Phase 3: Outlier Handling & Robustness Analysis** *(Up Next - `03_outlier_analysis.ipynb`)*
 - **Phase 4: Preprocessing & Categorical Encoding Pipelines** *(`04_preprocessing.ipynb`)*
 - **Phase 5: Agricultural Feature Engineering** *(`05_feature_engineering.ipynb`)*
 - **Phase 6: Independent Feature Selection Experiments** *(`06_feature_selection.ipynb`)*

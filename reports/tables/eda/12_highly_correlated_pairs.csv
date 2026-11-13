@@ -1,0 +1,5 @@
+Feature 1,Feature 2,Pearson r,Spearman rho,Nature of Relationship
+Nitrogen,Fertilizer,0.969,0.9873,Algebraic Redundancy
+Phosphorus,Fertilizer,0.9373,0.956,Algebraic Redundancy
+Nitrogen,Phosphorus,0.8512,0.9128,Temporal Co-Evolution
+Year,Pesticide,-0.8779,-0.913,Temporal Co-Evolution

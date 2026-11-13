@@ -1,0 +1,16 @@
+Feature,Type,Role,Unit,Dynamics,Resolution,Limitations
+Year,Integer,Temporal Index,Calendar Year,Dynamic,Annual (1966-2017),Strict linear trend; macro technological shifts.
+Region,Categorical,Spatial Entity,"District, State",Static,309 Harmonized Districts,Historical boundaries harmonized to 1966 baseline by ICRISAT.
+Crop,Categorical,Agronomic Target Group,Crop Name,Categorical,21 Field Crops,Distinct biological yield scales (fresh cane vs dry grain).
+Season,Categorical,Cropping Cycle,Category,Categorical,3 Seasons,Deterministic mapping from Crop in this compiled dataset.
+Temperature,Float,Climate Predictor,°C,Dynamic,Seasonal Mean,NASA POWER surface reanalysis; smooths daily acute heatwaves.
+Rainfall,Float,Climate Predictor,mm,Dynamic,Cumulative Season,Total seasonal volume; does not capture mid-season dry spells.
+Humidity,Float,Climate Predictor,%,Dynamic,Seasonal Mean,Relative surface humidity; satellite/reanalysis proxy.
+Soil Type,Categorical,Edaphic Predictor,USDA Order,Static,6 Soil Orders,Dominant district soil classification; ignores local field variability.
+pH,Float,Edaphic Predictor,pH Scale (0-14),Static,Topsoil Mean,Tied closely to Soil Type; narrow district variance (5.6 to 8.0).
+Nitrogen,Float,Nutrient Predictor,kg/ha,Dynamic/Annual,District Average,ICRISAT district consumption estimates; N component of Fertilizer.
+Phosphorus,Float,Nutrient Predictor,kg/ha,Dynamic/Annual,District Average,P component of Fertilizer.
+Potassium,Float,Nutrient Predictor,kg/ha,Dynamic/Annual,District Average,K component of Fertilizer.
+Fertilizer,Float,Nutrient Total,kg/ha,Dynamic/Annual,District Average,Exact mathematical sum of N + P + K (|diff| < 0.21 kg/ha).
+Pesticide,Float,Chemical Input,kg/ha,Dynamic/Annual,National Aggregate,16 discrete values; invariant across all districts within any single year.
+Yield,Float,Prediction Target,kg/ha,Target,District-Crop-Year,Harvested mass per unit cultivated area; heavily skewed.

@@ -1,0 +1,13 @@
+Feature,Availability_Time,Operational_Forecasting_Use,Scenario_Dependency
+Region / State,Pre-Season (Known),Fully Available,Static location specification.
+Soil Type,Pre-Season (Known),Fully Available,Static edaphic property.
+pH,Pre-Season (Known),Fully Available,Static edaphic property.
+Crop,Pre-Season (Known),Fully Available,Farmer planting decision.
+Season,Pre-Season (Known),Fully Available,Cropping calendar.
+Year,Pre-Season (Known),Fully Available,Calendar year.
+Temperature,Post-Season (Contemporaneous),NOT Known in Advance,Requires seasonal climate forecast or user scenario.
+Rainfall,Post-Season (Contemporaneous),NOT Known in Advance,Requires seasonal monsoon forecast or user scenario.
+Humidity,Post-Season (Contemporaneous),NOT Known in Advance,Requires seasonal meteorological scenario.
+Nitrogen / P / K,In-Season (Management),NOT Known in Advance,Requires farmer management assumption or planned dosage.
+Fertilizer,In-Season (Management),NOT Known in Advance,Requires farmer management assumption.
+Pesticide,Post-Season (National Annual),NOT Known in Advance,National aggregate; unknown until statistical publication.

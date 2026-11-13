@@ -22,49 +22,55 @@
 
 ---
 
-### Phase 2: Exploratory Data Analysis (EDA)
+### Phase 2: Comprehensive Exploratory Data Analysis (Completed)
 - **Primary Notebook:** `notebooks/02_exploratory_data_analysis.ipynb`
-- [ ] Univariate distributions of Yield and agricultural inputs (skewness, log distributions).
-- [ ] Bivariate relationships: climate (temperature, rainfall, humidity) vs. yield.
-- [ ] Soil taxonomy and pH impact across crop families.
-- [ ] Crop-specific and season-specific yield profiles.
-- [ ] Temporal trends (1966–2017) reflecting technology and Green Revolution adoption.
-- [ ] State-wise geographic distribution and harvest intensity.
-- [ ] Publication-quality inline visualizations with academic interpretations.
+- [x] Target distribution analysis: Skewness (+3.74), kurtosis (26.38), and log1p normalization (-0.10 skewness).
+- [x] Crop-wise yield disaggregation across all 21 crops: Sugarcane scale disparity (median 5,200 kg/ha vs Cotton 212.50 kg/ha).
+- [x] Seasonal confounding analysis: Discovered exact 1-to-1 deterministic mapping between Crop and Season.
+- [x] Temporal productivity trends (1966–2017): Non-stationary Green Revolution trajectories in Wheat and Rice (>300% yield growth).
+- [x] Geographic variation across 20 states and 309 districts: Spatial sampling distribution and irrigation disparity.
+- [x] Non-linear agro-climatic response curves: Thermal optima and crop-specific precipitation thresholds.
+- [x] Edaphic constraints: Soil taxonomy and narrow pH distributions (std 0.12–0.35 within Soil Orders).
+- [x] Nutrient collinearity proof: Mathematical identity $\text{Fertilizer} \equiv N + P + K$ across 100.00% of rows ($|\Delta| < 0.21$).
+- [x] Pesticide macro-investigation: Zero within-year variance; confirmed national FAOSTAT step-function assignment.
+- [x] Correlation & collinearity matrices: Isolated severe predictor pairs ($|r| \ge 0.70$) and explained low pooled linear climate correlations.
+- [x] Outlier exploration: Contextualized Chickpea reporting anomalies in Bihar 2007 (58,363.64 and 32,000 kg/ha) vs valid Sugarcane extremes.
+- [x] Feature Availability Contract: Pre-season known vs in-season contemporaneous vs management scenario variables.
+- [x] Evidence-based findings matrix (10 core findings) and actionable recommendations for Phases 3 through 9.
+- [x] Exported 20 publication-grade figures (`reports/figures/eda/`) and 16 summary tables (`reports/tables/eda/`).
 
 ---
 
-### Phase 3: Outlier Handling & Robustness Analysis
+### Phase 3: Outlier Handling & Robustness Analysis (Up Next)
 - **Primary Notebook:** `notebooks/03_outlier_analysis.ipynb`
-- [ ] Investigate recording anomalies (e.g. chickpea extreme maximum yield).
-- [ ] Implement configurable outlier handling strategies on training data:
+- [ ] Implement configurable crop-stratified outlier handling strategies on training data:
   - Baseline: No outlier removal.
-  - IQR-based detection.
-  - Z-score / Modified Z-score.
-  - Percentile capping (winsorization).
-  - Crop-specific dynamic thresholds (mandatory for sugarcane vs. pulses).
-- [ ] Strictly ensure test and validation partitions remain unfiltered.
+  - Crop-specific IQR trimming ($Q3 + 1.5 \times IQR$ and $Q3 + 3.0 \times IQR$).
+  - Crop-specific Z-score / Modified Z-score.
+  - Percentile capping (winsorization at 1st and 99th percentiles).
+- [ ] Address identified data-entry reporting errors in training split (e.g. Bihar Chickpea records).
+- [ ] Strictly ensure validation and test partitions remain untouched and unclipped.
 
 ---
 
 ### Phase 4: Preprocessing & Categorical Encoding Pipelines
 - **Primary Notebook:** `notebooks/04_preprocessing.ipynb`
 - [ ] Build reusable `ColumnTransformer` pipelines:
-  - Categorical encoders: One-Hot Encoding with handling of unseen categories, Target Encoding (out-of-fold), or Ordinal Encoding where appropriate.
+  - Categorical encoders: OneHotEncoder (handling unseen categories) for `Region`, `Crop`, `Soil Type`.
+  - Address `Season` redundancy (since `Crop` deterministically encodes `Season`).
   - Numerical scalers: StandardScaler, RobustScaler, MinMaxScaler.
-- [ ] Address strict collinearity of `Fertilizer` with `N`, `P`, and `K`.
-- [ ] Log / Power transformations for skewed features where statistically indicated.
+- [ ] Log-target transformation (`TransformedTargetRegressor` with `np.log1p`).
+- [ ] Handle `Fertilizer` collinearity with $N, P, K$.
 - [ ] Save fitted transformers for inference.
 
 ---
 
 ### Phase 5: Agricultural Feature Engineering
 - **Primary Notebook:** `notebooks/05_feature_engineering.ipynb`
-- [ ] Nutrient stoichiometry: N:P, N:K, P:K ratios (with zero-division protection).
-- [ ] Agro-climatic interaction terms: Aridity index proxies, rainfall-to-temperature ratios.
-- [ ] Historical temporal indicators: District rolling averages, crop historical productivity baselines.
+- [ ] Nutrient stoichiometry: $N:P$, $N:K$, and $P:K$ ratios (with zero-division protection $\epsilon$).
+- [ ] Agro-climatic interaction terms: Aridity index proxies ($\text{Rainfall} / (\text{Temperature} + 10)$).
+- [ ] Historical temporal indicators: Expanding-window district-crop historical mean yields (strictly computed on past years).
 - [ ] Distinguish pre-season available features from contemporaneous scenario inputs.
-- [ ] Strict temporal leakage prevention during lag and rolling calculations.
 
 ---
 
@@ -77,7 +83,7 @@
   - LASSO (L1-regularized linear model) selector.
   - Tree-based feature importance selector (Random Forest / Extra Trees).
   - Recursive Feature Elimination (RFE).
-- [ ] Run matrix of experiments (e.g. Standard Scaler + MI, Robust Scaler + LASSO) without altering training code.
+- [ ] Run matrix of experiments without altering training code.
 - [ ] Track selected features, selection runtime, and feature stability.
 
 ---

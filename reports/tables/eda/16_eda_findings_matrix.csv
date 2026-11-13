@@ -1,0 +1,11 @@
+Finding_ID,Domain,Empirical_Evidence,ML_Pipeline_Implication,Target_Phase,Confidence
+F01,Target Variable,Raw yield is severely right-skewed (+3.74); log1p transformation reduces skewness to -0.10.,Evaluating with MSE will over-penalize high-yield crops. Explore log-target regression in Phase 4.,Phase 4 & 7,High
+F02,Crop Heterogeneity,"Sugarcane median (5,200 kg/ha) is 24x higher than Cotton (212.5 kg/ha).",Global outlier thresholds are invalid. Outlier detection must be crop-stratified.,Phase 3,High
+F03,Target Outliers,"Chickpea yields > 30,000 kg/ha in Bihar (2007) are impossible data-entry errors.",Implement training-set outlier trimming to prevent gradient corruption.,Phase 3,High
+F04,Input Collinearity,Fertilizer = Nitrogen + Phosphorus + Potassium across 100.00% of observations (|diff| < 0.21).,Drop Fertilizer or evaluate multicollinearity in feature selection to prevent infinite VIF.,Phase 4 & 6,High
+F05,Macro Pesticide,Pesticide has zero within-year variance; acts as a 1D national step function correlated with Year (r = -0.76).,Pesticide provides no district-level management signal; evaluate for elimination in feature selection.,Phase 6,High
+F06,Non-Linear Climate,"Bivariate linear correlation with Rainfall is ~0, but binned crop-specific responses show clear optima.",Linear models will fail without Crop x Climate interaction terms; tree models will capture non-linearities.,Phase 5 & 7,High
+F07,Temporal Stationarity,"Green Revolution cereals (Wheat, Rice) experienced >300% yield growth from 1966 to 2017.","Strict chronological out-of-time evaluation (Train <=2011, Val 2012-2014, Test 2015-2017) is mandatory.",All Phases,High
+F08,Season Confounding,Crop and Season exhibit a block-diagonal 1-to-1 mapping. Every crop belongs to exactly 1 season.,Season is completely collinear with Crop; one-hot encoding both creates redundant degrees of freedom.,Phase 4,High
+F09,Edaphic Predictors,pH is strictly bounded (5.6 - 8.0) and has tiny variance within USDA Soil Orders (std 0.12 - 0.35).,pH likely derived from soil taxonomy; test whether it adds value beyond Soil Type.,Phase 6,Moderate
+F10,Forecasting Boundaries,Weather and nutrient variables are contemporaneous post-planting observations.,Classify models as scenario-based yield predictors rather than pre-season forecasts.,Phase 8 & 9,High

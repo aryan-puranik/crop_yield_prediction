@@ -1,0 +1,11 @@
+Column,Reported_Missing,Measurement_Source,Epistemic_Status,Known_Limitation
+Yield,0 (0.00%),ICRISAT / Directorate of Economics & Statistics,Direct Harvest Statistics,Contains rare transcription/decimal reporting errors (e.g. Chickpea >58k kg/ha).
+Year,0 (0.00%),Official Agricultural Year,Deterministic,Covers 1966-2017; no future observations exist in raw dataset.
+Region,0 (0.00%),ICRISAT District Apportionment,Harmonized Geography,District boundaries changed post-1966; harmonized to historical 309 units.
+Temperature,0 (0.00%),NASA POWER Agroclimatology,Satellite/Reanalysis Grid,Spatial resolution 0.5°x0.5°; smooths localized microclimates and diurnal extremes.
+Rainfall,0 (0.00%),NASA POWER Agroclimatology,Satellite/Reanalysis Grid,Cumulative seasonal sum; does not distinguish continuous rain from cloudbursts.
+Humidity,0 (0.00%),NASA POWER Agroclimatology,Satellite/Reanalysis Grid,Mean seasonal relative humidity; reanalysis proxy.
+Soil Type,0 (0.00%),NBSS&LUP Soil Surveys,Static Classification,6 dominant orders; does not capture parcel-level field heterogeneity.
+pH,0 (0.00%),Soil Survey Inferred Attribute,Inferred / Lookup,Extremely low variance within Soil Orders; likely static assignment.
+Fertilizer (NPK),0 (0.00%),ICRISAT District Apportionment,Derived Aggregates,District sales data distributed across cropping area; Fertilizer = N+P+K.
+Pesticide,0 (0.00%),FAOSTAT National Input Data,National Macro-Broadcast,Zero district variance; national annual constant assigned to all records.
