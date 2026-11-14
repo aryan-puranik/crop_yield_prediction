@@ -1,166 +1,201 @@
-# Crop Yield Prediction and Forecasting Using Agricultural Data and Machine Learning
+﻿# Crop Yield Prediction and Forecasting Using Agricultural Data and Machine Learning
 
-A research-oriented, reproducible, and modular machine learning framework for predicting and forecasting crop yields across Indian agricultural districts using historical multi-source data (1966–2017).
-
----
-
-## 1. Project Overview & Research Paradigm
-
-Accurate crop yield prediction is vital for national food security planning, agro-economic risk management, supply-chain resilience, and agricultural policy formulation. 
-
-This project follows an academic, **notebook-first research workflow**:
-- **Research Execution via Notebooks:** All exploratory data analysis, outlier investigations, feature engineering, feature selection experiments, model training, evaluation, and visualizations are implemented in structured, publication-grade Jupyter Notebooks (`notebooks/01_*.ipynb` through `notebooks/09_*.ipynb`).
-- **Modular Python Backend:** Reusable data loading, schema validation, preprocessing transformers, feature selectors, model wrappers, and evaluation metrics remain in decoupled Python modules under `src/` and are imported into notebooks.
-- **Primary Target:** Crop Yield measured in **$\text{kg/ha}$** (yield per unit area, not gross production volume).
-- **Evaluation Paradigm:** Strict chronological partitioning (Train: 1966–2011, Validation: 2012–2014, Test: 2015–2017) to prevent temporal target leakage.
-- **Scientific Honesty:** Clear differentiation between scenario-based yield estimation (conditioned on observed season inputs) and true advance pre-season forecasting.
+**Author:** Aryan Puranik  
+**Academic Project:** Bachelor of Technology / Computer Science & Engineering (Machine Learning)  
+**Historical Scope:** 1966–2017 (52 years across 309 Indian districts and 21 crops)  
 
 ---
 
-## 2. Dataset Attribution and Provenance
+## 1. Project Overview
 
-- **File Location:** `data/raw/crop_yield_dataset.csv`
-- **Dataset Fingerprint (SHA-256):** Verified at runtime to guarantee reproducibility.
-- **Total Observations:** 198,369 rows across 52 consecutive harvest years (1966–2017).
-- **Geographic Coverage:** 309 agricultural districts across 20 Indian states.
-- **Crop Coverage:** 21 major Indian crops (Cereals, Pulses, Oilseeds, Fibers, and Commercial crops).
-- **Integrated Sources:**
-  - **ICRISAT (District Level Data):** District-wise agricultural yields, cropping patterns, and fertilizer statistics.
-  - **NASA POWER Agroclimatology:** Satellite and reanalysis meteorological parameters (temperature, precipitation, relative humidity).
-  - **FAOSTAT:** National-level agricultural input aggregates (pesticide macro-consumption).
+Accurate agricultural crop yield prediction is crucial for food security planning, agro-economic risk management, and agricultural policy formulation. This project implements a reproducible, research-grade machine learning system to predict and forecast crop yields across Indian agricultural districts.
 
-### Key Empirical Findings (from `notebooks/01_data_audit.ipynb` & `02_exploratory_data_analysis.ipynb`):
-1. **Target Skewness:** Raw yield has skewness of $+3.74$ (mean $1,239.22\text{ kg/ha}$ vs median $800.00\text{ kg/ha}$); $\log(y + 1)$ normalizes skewness to $-0.10$.
-2. **Crop Heterogeneity:** Sugarcane median yield ($5,200\text{ kg/ha}$) is $24\times$ higher than Cotton ($212.50\text{ kg/ha}$). Outlier treatment must be strictly crop-stratified.
-3. **Deterministic Seasonal Mapping:** `Season` has an exact 1-to-1 block-diagonal relationship with `Crop`. Seasonal yield differences reflect crop composition rather than independent climate effects.
-4. **Multicollinearity:** $\text{Fertilizer} \equiv \text{Nitrogen} + \text{Phosphorus} + \text{Potassium}$ across 100.00% of observations ($|\Delta| < 0.21\text{ kg/ha}$).
-5. **Pesticide Macro-Broadcast:** Exactly 16 discrete values; zero within-year variance across all 309 districts; highly correlated with Year ($r = -0.76$).
-6. **Non-Linear Agro-Climatology:** Pooled linear correlation of rainfall/temperature with yield is near zero ($r \approx 0$), but crop-stratified binned responses reveal pronounced biological optima.
-7. **Green Revolution Non-Stationarity:** Major cereals (Wheat and Rice) experienced $>300\%$ yield growth from 1966 to 2017, confirming the necessity of chronological out-of-time evaluation.
+### Key Methodological Highlights:
+- **Prediction Target:** Crop Yield measured strictly in **$\text{kg/ha}$** (productivity per unit area), eliminating the acreage confounding inherent in total production volume.
+- **Leakage Prevention:** Chronological data splitting (Train: 1966–2011, Validation: 2012–2014, Test: 2015–2017) ensures future technological and climatic drift does not contaminate past training data.
+- **Crop-Stratified Integrity:** Outlier handling and performance evaluation are applied on a per-crop basis, acknowledging that biological baselines vary by more than an order of magnitude (Sugarcane $\sim 5,200\text{ kg/ha}$ vs. Cotton $\sim 212\text{ kg/ha}$).
+- **Notebook-First Research:** Core scientific analysis is organized into 4 concise Jupyter Notebooks with detailed theory and methodology documented in `docs/`.
 
 ---
 
-## 3. Project Directory Structure
+## 2. Repository Structure
 
 ```text
 crop_yield_prediction/
-├── config/                     # Configuration scaffolding (YAML)
-│   ├── default_config.yaml     # Global paths, metrics, seeds
-│   ├── schema_config.yaml      # Expected columns, data types, physical bounds
-│   └── data_split_config.yaml  # Chronological split definitions
+├── app.py                      # Interactive Streamlit Web Application
+├── requirements.txt            # Python dependencies
+├── pyproject.toml              # Build & test configuration
+├── README.md                   # Project documentation and guide
+│
 ├── data/
-│   ├── raw/                    # Read-only historical dataset (crop_yield_dataset.csv)
-│   ├── processed/              # Processed datasets (generated during experiments)
-│   └── interim/                # Temporary transformed partitions
-├── notebooks/                  # Primary Research Environment (Jupyter Notebooks)
-│   ├── 01_data_audit.ipynb     # Completed: Data audit, schema integrity, and initial findings
-│   ├── 02_exploratory_data_analysis.ipynb   # Completed: 20-section comprehensive EDA
-│   ├── 03_outlier_analysis.ipynb            # (Phase 3 - Up Next)
-│   ├── 04_preprocessing.ipynb               # (Phase 4)
-│   ├── 05_feature_engineering.ipynb         # (Phase 5)
-│   ├── 06_feature_selection.ipynb           # (Phase 6)
-│   ├── 07_model_training.ipynb              # (Phase 7)
-│   ├── 08_model_evaluation.ipynb            # (Phase 8)
-│   └── 09_future_yield_prediction.ipynb     # (Phase 9)
-├── src/                        # Reusable Python Modules (imported by notebooks)
-│   ├── data/                   # Data loader, schema validator, chronological splitters
-│   │   ├── loader.py
-│   │   └── schema.py
-│   ├── preprocessing/          # Interchangeable preprocessing pipelines
-│   │   └── base.py
-│   ├── features/               # Domain feature engineering & independent selectors
-│   │   ├── engineer.py
-│   │   └── selector.py
-│   ├── models/                 # Model wrappers and training orchestrators
-│   │   └── base.py
-│   └── evaluation/             # Academic regression metrics & crop breakdowns
-│       └── metrics.py
-├── tests/                      # Automated test suite
-│   ├── test_data_loader.py
-│   ├── test_schema_validation.py
-│   ├── test_splits.py
-│   └── test_interfaces.py
+│   ├── raw/                    # Read-only original dataset (crop_yield_dataset.csv)
+│   └── processed/              # Chronological splits (train.csv, val.csv, test.csv)
+│
+├── notebooks/                  # 4-Stage Research Notebooks
+│   ├── 01_exploratory_data_analysis.ipynb     # Target distributions, climate & collinearity
+│   ├── 02_data_preparation.ipynb             # Chronological split, outlier removal, export
+│   ├── 03_feature_selection.ipynb            # Collinearity tests, MI, tree importances
+│   └── 04_model_training_evaluation.ipynb    # Model training, test evaluation, pipeline export
+│
+├── docs/                       # Comprehensive Methodology & Viva Guides
+│   ├── 01_data_audit.md                      # Raw data schema, provenance & limitations
+│   ├── 02_exploratory_data_analysis.md       # In-depth statistical EDA tables and insights
+│   ├── 03_feature_selection_guide.md         # Collinearity proofs, VIF, selection strategies
+│   └── 04_model_evaluation_and_viva.md      # Metrics, crop breakdowns & viva defense Q&A
+│
+├── models/                     # Saved Final Fitted Machine Learning Pipeline
+│   └── best_pipeline.joblib    # scikit-learn Pipeline (preprocessing + Extra Trees)
+│
 ├── reports/
 │   ├── figures/eda/            # 20 publication-grade figures from Phase 2 EDA
 │   ├── tables/eda/             # 16 reproducible statistical CSV tables from Phase 2 EDA
-│   └── methodological_risks.md # Methodological notes & governance documentation
-├── experiments/                # Persistent experiment records & artifacts
-├── artifacts/                  # Serialized pipelines and model metadata
-├── app/                        # Streamlit web application (Phase 9)
-├── .gitignore                  # Python & ML ignore patterns
-├── ARCHITECTURE_RULES.md       # 13 ML Architecture & governance rules
-├── PROJECT_PROGRESS.md         # Phased milestone tracker
-├── ROADMAP.md                  # Comprehensive implementation roadmap
-├── pyproject.toml              # Project metadata & pytest configuration
-├── requirements.txt            # Pinned, tested dependencies
-└── README.md                   # This project guide
+│   └── methodological_risks.md # Methodological notes & leakage prevention safeguards
+│
+├── src/                        # Reusable Python Utility Modules
+│   ├── __init__.py
+│   ├── utils.py                # Data loading, chronological splitting, SHA-256 fingerprint
+│   └── metrics.py              # Regression metrics & crop-wise breakdown calculations
+│
+└── tests/                      # Automated Pytest Suite
+    ├── test_data.py            # Unit tests for loading and chronological splits
+    └── test_metrics.py         # Unit tests for metric calculations
 ```
 
 ---
 
-## 4. Installation and Environment Setup
+## 3. Dataset Attribution and Key Findings
 
-### Prerequisites
-- Python 3.11 or Python 3.12 (Python 3.12 recommended for full pre-built wheel compatibility on Windows).
-- Git.
+- **Dataset File:** `data/raw/crop_yield_dataset.csv`
+- **Total Records:** 198,369 observations spanning 1966 to 2017.
+- **Coverage:** 309 districts across 20 Indian states and 21 major crops.
+- **Integrated Sources:** ICRISAT (district agricultural statistics), NASA POWER (agroclimatology), and FAOSTAT (national pesticide consumption).
 
-### 1. Clone Repository & Setup
+### Major Findings:
+1. **Target Skewness:** Raw yield has high positive skew ($+3.74$), driven by high-yielding commercial crops like Sugarcane.
+2. **Deterministic Multicollinearity:** Across 100% of rows, $\text{Fertilizer} \equiv \text{Nitrogen} + \text{Phosphorus} + \text{Potassium}$ ($|\Delta| \le 0.21\text{ kg/ha}$). Total Fertilizer must be removed from linear models to avoid infinite VIF.
+3. **Data-Entry Outliers:** Two extreme Chickpea entries in Bihar (2007) recorded $>30,000\text{ kg/ha}$ (historical median is $675\text{ kg/ha}$). These are pruned strictly from the training partition.
+4. **Pesticide Broadcast:** Pesticide application has only 16 unique values and zero within-year district variation, acting as a national-level macro indicator.
+
+---
+
+## 4. Quickstart & Installation
+
+### Step 1: Clone and Set Up Python Environment
 ```bash
-git clone https://github.com/aryanpuranik22/crop-yield-prediction.git
-cd crop-yield-prediction
-```
+git clone https://github.com/aryan-puranik/crop_yield_prediction.git
+cd crop_yield_prediction
 
-### 2. Create Virtual Environment
-```bash
-python -m venv .venv
-# On Windows PowerShell:
-.venv\Scripts\Activate.ps1
+# Create and activate a virtual environment (Python 3.11 or 3.12 recommended)
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
 # On Linux/macOS:
-source .venv/bin/activate
+source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+### Step 2: Install Dependencies
 ```bash
-pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+### Step 3: Run Automated Tests
+```bash
+pytest tests/
+```
+*(All 5 test cases should pass in under 3 seconds)*
+
 ---
 
-## 5. Running Notebooks & Automated Tests
+## 5. Notebook Research Workflow
 
-### Launching Jupyter
+The project analysis proceeds through 4 self-contained Jupyter notebooks:
+
+1. **`notebooks/01_exploratory_data_analysis.ipynb`**
+   - Inspects distributions of target and environmental predictors.
+   - Plots crop-wise yield variance and tests fertilizer collinearity.
+   - *Reference Guide:* [`docs/02_exploratory_data_analysis.md`](docs/02_exploratory_data_analysis.md)
+
+2. **`notebooks/02_data_preparation.ipynb`**
+   - Implements temporal holdout: Train ($\le 2011$), Val ($2012\text{–}2014$), Test ($2015\text{–}2017$).
+   - Prunes training data-entry errors without touching validation/test sets.
+   - Generates engineered domain features (`Rainfall_per_Temp`, `NP_Ratio`, `NK_Ratio`).
+   - Exports clean datasets to `data/processed/`.
+
+3. **`notebooks/03_feature_selection.ipynb`**
+   - Benchmarks Baseline vs Collinearity-Filtered feature sets.
+   - Evaluates Tree-based MDI feature importances and Mutual Information scores.
+   - *Reference Guide:* [`docs/03_feature_selection_guide.md`](docs/03_feature_selection_guide.md)
+
+4. **`notebooks/04_model_training_evaluation.ipynb`**
+   - Trains Ridge, Decision Tree, Random Forest, and Extra Trees.
+   - Evaluates champion model on held-out test data ($2015\text{–}2017$).
+   - Computes crop-wise breakdown and diagnostic residual plots.
+   - Serializes complete pipeline to `models/best_pipeline.joblib`.
+   - *Reference Guide:* [`docs/04_model_evaluation_and_viva.md`](docs/04_model_evaluation_and_viva.md)
+
+---
+
+## 6. Experimental Results
+
+### Model Benchmark on Validation Split (2012–2014)
+
+| Model | Val MAE (kg/ha) | Val RMSE (kg/ha) | Val $R^2$ | Notes |
+| :--- | :---: | :---: | :---: | :--- |
+| **Ridge Regression** | 630.89 | 1000.47 | 0.6635 | Fast linear baseline; misses non-linear responses. |
+| **Decision Tree** | 509.40 | 882.11 | 0.7384 | Captures weather interactions; prone to variance. |
+| **Random Forest** | 457.18 | 755.56 | 0.8081 | Strong ensemble generalization. |
+| **Extra Trees (Champion)** | **453.88** | **740.95** | **0.8155** | Best balance of variance reduction and fit. |
+
+### Held-Out Test Evaluation (2015–2017)
+- **Test $R^2$:** **0.7206**
+- **Test MAE:** **520.84 kg/ha**
+- **Test RMSE:** **936.24 kg/ha**
+
+### Crop-Wise Breakdown (Selected Benchmark Crops)
+
+| Crop | Test Samples | Mean True Yield (kg/ha) | Test MAE (kg/ha) | Test RMSE (kg/ha) | Test $R^2$ |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Wheat** | 714 | 2,605.42 | 583.89 | 768.17 | 0.5502 |
+| **Rice** | 756 | 2,374.55 | 551.07 | 725.51 | 0.4166 |
+| **Sugarcane** | 629 | 6,638.25 | 1681.93 | 2400.44 | 0.1286 |
+| **Maize** | 763 | 2,714.69 | 965.66 | 1503.51 | 0.2825 |
+| **Cotton** | 465 | 315.80 | 68.20 | 104.50 | 0.8120 |
+
+---
+
+## 7. Interactive Streamlit Web Application
+
+The project includes an interactive web application allowing users to input district location, crop type, soil taxonomy, climate sliders, and macronutrient applications to predict expected crop yield.
+
+### Launching the Application:
 ```bash
-jupyter notebook notebooks/
-# Launch the EDA notebook directly:
-jupyter notebook notebooks/02_exploratory_data_analysis.ipynb
+streamlit run app.py
 ```
 
-### Running Automated Tests
-```bash
-python -m pytest tests/ -v
-```
-
-Current test status: **12 passed**.
+### Features:
+- Predicts expected yield in **kg/ha**, **Tonnes/Hectare**, and **Quintals/Acre**.
+- Displays comparison against the historical national median for the selected crop.
+- Explains model assumptions, agronomic context, and limitations in real-time.
 
 ---
 
-## 6. Phased Implementation Roadmap
+## 8. Academic Viva Voce / Project Defense Q&A
 
-- **Phase 1: Project Initialization & Notebook Data Audit** *(Completed - `01_data_audit.ipynb`)*
-- **Phase 2: Comprehensive Exploratory Data Analysis** *(Completed - `02_exploratory_data_analysis.ipynb`)*
-- **Phase 3: Outlier Handling & Robustness Analysis** *(Up Next - `03_outlier_analysis.ipynb`)*
-- **Phase 4: Preprocessing & Categorical Encoding Pipelines** *(`04_preprocessing.ipynb`)*
-- **Phase 5: Agricultural Feature Engineering** *(`05_feature_engineering.ipynb`)*
-- **Phase 6: Independent Feature Selection Experiments** *(`06_feature_selection.ipynb`)*
-- **Phase 7: Machine Learning Model Training & Optimization** *(`07_model_training.ipynb`)*
-- **Phase 8: Final Benchmark Evaluation** *(`08_model_evaluation.ipynb`)*
-- **Phase 9: Future Yield Prediction & Streamlit Application** *(`09_future_yield_prediction.ipynb` & `app/`)*
+**Q1: Why is your target Yield (kg/ha) instead of Total Production (Tonnes)?**  
+*Answer:* Total production is confounded by farm area (hectares). A large district produces more tonnes simply because it has more farmland, not because farming is more productive. Modeling Yield (kg/ha) normalizes for farm size, allowing us to evaluate true agricultural productivity and climatic response.
 
-See [ROADMAP.md](file:///d:/crop_yield_prediction/ROADMAP.md) and [PROJECT_PROGRESS.md](file:///d:/crop_yield_prediction/PROJECT_PROGRESS.md) for details.
+**Q2: Why did you use chronological splitting instead of random K-fold cross-validation?**  
+*Answer:* Agricultural data has strong temporal trends (e.g. Green Revolution fertilizer adoption, high-yielding seed varieties). Shuffling years randomly in $k$-fold cross-validation leaks future yield drift into past training data, creating artificially inflated accuracy that fails in real-world deployment.
+
+**Q3: Why did you drop total Fertilizer during feature selection?**  
+*Answer:* In our exploratory analysis, $\text{Fertilizer} \equiv \text{Nitrogen} + \text{Phosphorus} + \text{Potassium}$ across 100% of rows. Keeping both causes exact multicollinearity ($R^2 = 1.0$), destabilizing regression coefficients and inflating variance.
+
+**Q4: Why is overall $R^2$ insufficient for evaluating agricultural models?**  
+*Answer:* Sugarcane yields $>5,000\text{ kg/ha}$ while Cotton yields $\sim 212\text{ kg/ha}$. In a pooled dataset, high-yield crops dominate the variance, meaning a model could score high overall $R^2$ while failing on lower-yield crops. Therefore, crop-wise error metrics are mandatory.
 
 ---
 
-## 7. License & Attribution
+## 9. License & Academic Citation
 
-This project is developed for research and educational purposes. Original agricultural records are sourced from ICRISAT District Level Data, NASA POWER Agroclimatology, and FAOSTAT.
+This project is developed for academic, educational, and research purposes.  
+**Author:** Aryan Puranik (2026)
