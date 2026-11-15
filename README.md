@@ -1,4 +1,4 @@
-﻿# Crop Yield Prediction and Forecasting Using Agricultural Data and Machine Learning
+# Crop Yield Prediction and Forecasting Using Agricultural Data and Machine Learning
 
 **Author:** Aryan Puranik  
 **Academic Project:** Bachelor of Technology / Computer Science & Engineering (Machine Learning)  
@@ -31,11 +31,12 @@ crop_yield_prediction/
 │   ├── raw/                    # Read-only original dataset (crop_yield_dataset.csv)
 │   └── processed/              # Chronological splits (train.csv, val.csv, test.csv)
 │
-├── notebooks/                  # 4-Stage Research Notebooks
-│   ├── 01_exploratory_data_analysis.ipynb     # Target distributions, climate & collinearity
-│   ├── 02_data_preparation.ipynb             # Chronological split, outlier removal, export
-│   ├── 03_feature_selection.ipynb            # Collinearity tests, MI, tree importances
-│   └── 04_model_training_evaluation.ipynb    # Model training, test evaluation, pipeline export
+├── notebooks/                  # 5-Stage Research Notebooks
+│   ├── 01_exploratory_data_analysis_refined.ipynb     # Target distributions, climate & collinearity
+│   ├── 02_data_preparation_refined.ipynb             # Chronological split, outlier policy, pipeline setup
+│   ├── 03_feature_engineering_refined.ipynb          # Historical lags, rolling stats, climate anomalies
+│   ├── 04_feature_selection_refined.ipynb            # Collinearity tests, MI, tree importances, CV
+│   └── 05_model_training_evaluation_refined.ipynb    # Model training, test evaluation, pipeline export
 │
 ├── docs/                       # Comprehensive Methodology & Viva Guides
 │   ├── 01_data_audit.md                      # Raw data schema, provenance & limitations
@@ -108,25 +109,31 @@ pytest tests/
 
 ## 5. Notebook Research Workflow
 
-The project analysis proceeds through 4 self-contained Jupyter notebooks:
+The project analysis proceeds through 5 self-contained Jupyter notebooks:
 
-1. **`notebooks/01_exploratory_data_analysis.ipynb`**
+1. **`notebooks/01_exploratory_data_analysis_refined.ipynb`**
    - Inspects distributions of target and environmental predictors.
    - Plots crop-wise yield variance and tests fertilizer collinearity.
+   - Generates publication-grade figures in `reports/figures/eda/` and tables in `reports/tables/eda/`.
    - *Reference Guide:* [`docs/02_exploratory_data_analysis.md`](docs/02_exploratory_data_analysis.md)
 
-2. **`notebooks/02_data_preparation.ipynb`**
+2. **`notebooks/02_data_preparation_refined.ipynb`**
    - Implements temporal holdout: Train ($\le 2011$), Val ($2012\text{–}2014$), Test ($2015\text{–}2017$).
-   - Prunes training data-entry errors without touching validation/test sets.
-   - Generates engineered domain features (`Rainfall_per_Temp`, `NP_Ratio`, `NK_Ratio`).
-   - Exports clean datasets to `data/processed/`.
+   - Establishes outlier policy (diagnostic flagging of suspicious Chickpea entries without arbitrary deletion).
+   - Demonstrates scikit-learn numerical scaling and categorical encoding pipelines.
 
-3. **`notebooks/03_feature_selection.ipynb`**
+3. **`notebooks/03_feature_engineering_refined.ipynb`**
+   - Constructs historical yield features: 1-year lag, 5-year lag, 3-year rolling mean and standard deviation.
+   - Calculates historical climate anomalies (temperature and precipitation deviations).
+   - Evaluates historical coverage across partitions and saves datasets to `data/processed/feature_engineering/`.
+
+4. **`notebooks/04_feature_selection_refined.ipynb`**
    - Benchmarks Baseline vs Collinearity-Filtered feature sets.
-   - Evaluates Tree-based MDI feature importances and Mutual Information scores.
+   - Evaluates Tree-based MDI feature importances, Mutual Information, and VIF filtering.
+   - Conducts expanding-window chronological cross-validation across 3 historical folds.
    - *Reference Guide:* [`docs/03_feature_selection_guide.md`](docs/03_feature_selection_guide.md)
 
-4. **`notebooks/04_model_training_evaluation.ipynb`**
+5. **`notebooks/05_model_training_evaluation_refined.ipynb`**
    - Trains Ridge, Decision Tree, Random Forest, and Extra Trees.
    - Evaluates champion model on held-out test data ($2015\text{–}2017$).
    - Computes crop-wise breakdown and diagnostic residual plots.

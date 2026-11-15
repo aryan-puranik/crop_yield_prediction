@@ -1,0 +1,58 @@
+{
+  "E0_basic": [
+    "Region",
+    "Crop",
+    "Year"
+  ],
+  "E1_history": [
+    "Region",
+    "Crop",
+    "Year",
+    "Yield_Lag1",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Trend5",
+    "History_Lag1_Available",
+    "History_3yr_Complete"
+  ],
+  "E2_history_agriculture": [
+    "Region",
+    "Crop",
+    "Year",
+    "Yield_Lag1",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Trend5",
+    "History_Lag1_Available",
+    "History_3yr_Complete",
+    "Temperature",
+    "Rainfall",
+    "Humidity",
+    "Soil Type",
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium"
+  ],
+  "E3_history_climate": [
+    "Region",
+    "Crop",
+    "Year",
+    "Yield_Lag1",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Trend5",
+    "History_Lag1_Available",
+    "History_3yr_Complete",
+    "Temperature",
+    "Rainfall",
+    "Humidity",
+    "Soil Type",
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Temperature_Anomaly",
+    "Rainfall_Anomaly"
+  ]
+}
