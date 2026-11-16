@@ -1,2 +1,5 @@
 Model,Full_Val_MAE,Full_Val_RMSE,Full_Val_R2,Full_Val_MAP,Complete_Hist_MAE,Complete_Hist_RMSE,Complete_Hist_R2,Complete_Hist_MAP,Tier_Accuracy
-Linear Regression (OLS),356.04,680.81,0.8442,35.6,318.57,544.5,0.901,33.45,63.68
+Baseline: Region-Crop Historical Median,586.81,971.59,0.6824,40.18,588.3,962.24,0.6909,40.05,55.42
+Baseline: Naive Persistence (Lag 1),,,,,328.35,593.71,0.8823,29.9,62.15
+Baseline: Rolling 3-Year Mean,329.78,609.35,0.8751,30.16,314.66,562.34,0.8944,29.39,67.66
+"Baseline: EWMA Recency-Weighted (0.5, 0.3, 0.2)",321.37,595.48,0.8807,29.45,305.71,546.29,0.9004,28.63,64.2

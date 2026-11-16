@@ -1,0 +1,30 @@
+{
+  "model": "Persistence Baselines Ladder",
+  "rolling_3yr_complete_history": {
+    "Strategy": "5. Rolling 3-Year Historical Mean",
+    "Rows": 9966,
+    "MAE (kg/ha)": 314.66,
+    "RMSE (kg/ha)": 562.34,
+    "R2": 0.8944,
+    "MAP (%)": 29.39,
+    "WAPE (%)": 19.02
+  },
+  "ewma_complete_history": {
+    "Strategy": "6. EWMA Recency-Weighted (0.5, 0.3, 0.2)",
+    "Rows": 9966,
+    "MAE (kg/ha)": 305.71,
+    "RMSE (kg/ha)": 546.29,
+    "R2": 0.9004,
+    "MAP (%)": 28.63,
+    "WAPE (%)": 18.48
+  },
+  "rolling_3yr_full_validation": {
+    "Strategy": "Rolling 3-Year Mean (with Regional Fallback)",
+    "Rows": 10610,
+    "MAE (kg/ha)": 329.78,
+    "RMSE (kg/ha)": 609.35,
+    "R2": 0.8751,
+    "MAP (%)": 30.16,
+    "WAPE (%)": 20.19
+  }
+}
