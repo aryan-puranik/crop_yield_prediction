@@ -1,0 +1,2 @@
+Model,Full_Val_MAE,Full_Val_RMSE,Full_Val_R2,Full_Val_MAP,Complete_Hist_MAE,Complete_Hist_RMSE,Complete_Hist_R2,Complete_Hist_MAP,Tier_Accuracy
+Linear Regression (OLS),356.04,680.81,0.8442,35.6,318.57,544.5,0.901,33.45,63.68

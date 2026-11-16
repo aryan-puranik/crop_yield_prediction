@@ -1,0 +1,23 @@
+{
+  "model": "Linear Regression (OLS)",
+  "training_time_seconds": 6.66,
+  "tier_classification_accuracy": 0.6368,
+  "full_validation": {
+    "Cohort": "Full Validation Cohort",
+    "Rows": 11345,
+    "MAE (kg/ha)": 356.04,
+    "RMSE (kg/ha)": 680.81,
+    "R2": 0.8442,
+    "MAP (%)": 35.6,
+    "WAPE (%)": 21.83
+  },
+  "complete_history_validation": {
+    "Cohort": "Complete History Cohort (N=9,966)",
+    "Rows": 9966,
+    "MAE (kg/ha)": 318.57,
+    "RMSE (kg/ha)": 544.5,
+    "R2": 0.901,
+    "MAP (%)": 33.45,
+    "WAPE (%)": 19.25
+  }
+}
