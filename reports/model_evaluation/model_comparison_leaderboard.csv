@@ -3,3 +3,4 @@ Baseline: Region-Crop Historical Median,586.81,971.59,0.6824,40.18,588.3,962.24,
 Baseline: Naive Persistence (Lag 1),,,,,328.35,593.71,0.8823,29.9,62.15
 Baseline: Rolling 3-Year Mean,329.78,609.35,0.8751,30.16,314.66,562.34,0.8944,29.39,67.66
 "Baseline: EWMA Recency-Weighted (0.5, 0.3, 0.2)",321.37,595.48,0.8807,29.45,305.71,546.29,0.9004,28.63,64.2
+Linear Regression (OLS),325.94,563.49,0.8932,33.3,323.86,556.75,0.8965,32.78,66.01

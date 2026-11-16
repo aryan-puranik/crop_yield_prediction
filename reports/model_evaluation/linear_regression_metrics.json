@@ -1,23 +1,40 @@
 {
-  "model": "Linear Regression (OLS)",
-  "training_time_seconds": 6.66,
-  "tier_classification_accuracy": 0.6368,
+  "model_name": "Linear Regression (OLS)",
+  "specification": "Spec_A_Historical_Only",
+  "features_total": 31,
+  "training_time_seconds": 4.86,
+  "training_fit": {
+    "rows": 164915,
+    "mae": 224.89,
+    "rmse": 446.81,
+    "r2": 0.9104,
+    "map": 32.39,
+    "wape": 18.58
+  },
+  "inner_cv_mean": {
+    "mae": 269.14,
+    "r2": 0.8453
+  },
   "full_validation": {
-    "Cohort": "Full Validation Cohort",
-    "Rows": 11345,
-    "MAE (kg/ha)": 356.04,
-    "RMSE (kg/ha)": 680.81,
-    "R2": 0.8442,
-    "MAP (%)": 35.6,
-    "WAPE (%)": 21.83
+    "Cohort": "Full Validation (2012-2014)",
+    "Rows": 10610,
+    "MAE (kg/ha)": 325.94,
+    "RMSE (kg/ha)": 563.49,
+    "R2": 0.8932,
+    "MAP (%)": 33.3,
+    "WAPE (%)": 19.95
   },
   "complete_history_validation": {
     "Cohort": "Complete History Cohort (N=9,966)",
     "Rows": 9966,
-    "MAE (kg/ha)": 318.57,
-    "RMSE (kg/ha)": 544.5,
-    "R2": 0.901,
-    "MAP (%)": 33.45,
-    "WAPE (%)": 19.25
+    "MAE (kg/ha)": 323.86,
+    "RMSE (kg/ha)": 556.75,
+    "R2": 0.8965,
+    "MAP (%)": 32.78,
+    "WAPE (%)": 19.57
+  },
+  "tier_classification": {
+    "accuracy": 66.01,
+    "adjacent_accuracy": 95.3
   }
 }
