@@ -1,0 +1,28 @@
+{
+  "numerical_features": [
+    "Year",
+    "Temperature",
+    "Rainfall",
+    "Humidity",
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Pesticide",
+    "Yield_Lag1",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Change_1to5",
+    "History_Lag1_Available",
+    "History_3yr_Complete",
+    "Temperature_Anomaly",
+    "Rainfall_Anomaly"
+  ],
+  "categorical_features": [
+    "Region",
+    "Crop",
+    "Soil Type"
+  ],
+  "target": "Yield",
+  "description": "Selected feature set combining non-collinear agronomic variables, weather anomalies, and historical yield lags."
+}

@@ -1,0 +1,9 @@
+Model Configuration,Features,Cohort,MAE (kg/ha),RMSE (kg/ha),R2,MAP (%)
+Naive Benchmark: Previous Year (Lag 1),Lag1 only,"Complete History (N=9,966)",328.35,593.71,0.8823,29.9
+Naive Benchmark: Rolling 3-Year Mean,Rolling3 only,"Complete History (N=9,966)",314.66,562.34,0.8944,29.39
+Ridge: Traditional Baseline (No Lags),"10 num, 4 cat","Complete History (N=9,966)",628.2435936329689,991.6178389902469,0.6717667435561681,73.10939720838593
+Ridge: Traditional Baseline (No Lags),"10 num, 4 cat","Full Validation (N=11,345)",630.8957088890018,1000.4748310119111,0.6635362267706579,73.0202463868414
+Ridge: Reduced VIF (No Lags),"9 num, 3 cat","Complete History (N=9,966)",628.2395856610373,991.6160060972027,0.6717679569588983,73.10924878459893
+Ridge: Reduced VIF (No Lags),"9 num, 3 cat","Full Validation (N=11,345)",630.8929618115209,1000.4739171138024,0.6635368414657128,73.02020945297586
+Ridge: Feature Set E3 (With Historical Lags),"17 num, 3 cat","Complete History (N=9,966)",318.3443017151996,544.3125150806356,0.9011013053913494,33.4723843264562
+Ridge: Feature Set E3 (With Historical Lags),"17 num, 3 cat","Full Validation (N=11,345)",355.89402007430436,680.6678897340469,0.8442613152461723,35.63673857515137
