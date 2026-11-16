@@ -1,0 +1,25 @@
+{
+  "specification_name": "Spec_B1_Climate_Forecasting",
+  "description": "Predicting next-year regional rainfall, temperature, and humidity using deduplicated climate panel history.",
+  "targets": [
+    "Target_Temperature",
+    "Target_Rainfall",
+    "Target_Humidity"
+  ],
+  "target_year": "Target_Year",
+  "categorical_features": [
+    "Region"
+  ],
+  "numerical_features": [
+    "Year",
+    "Temp_Lag1",
+    "Temp_Lag2",
+    "Temp_Lag3",
+    "Rain_Lag1",
+    "Rain_Lag2",
+    "Rain_Lag3",
+    "Hum_Lag1",
+    "Hum_Lag2",
+    "Hum_Lag3"
+  ]
+}

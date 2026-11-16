@@ -1,0 +1,42 @@
+{
+  "specification_name": "Spec_A_Historical_Only",
+  "description": "Next-year crop yield forecasting using historical harvest data, causal climate anomalies, and soil characteristics available at origin t.",
+  "target": "Target_Yield",
+  "target_year": "Target_Year",
+  "categorical_features": [
+    "Region",
+    "Crop",
+    "Soil Type"
+  ],
+  "numerical_features": [
+    "Year",
+    "Is_Post_1990",
+    "Temperature",
+    "Rainfall",
+    "Humidity",
+    "Temperature_Anomaly",
+    "Rainfall_Anomaly",
+    "Humidity_Anomaly",
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Pesticide",
+    "NPK_Total",
+    "N_P_Ratio",
+    "Rain_Temp_Ratio",
+    "Yield_Lag1",
+    "Yield_Lag2",
+    "Yield_Lag3",
+    "Yield_Lag5",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Change_5Y",
+    "Yield_Trend_Velocity",
+    "Hist_Region_Crop_Median",
+    "Yield_Relative_Index",
+    "History_Lag1_Available",
+    "History_3yr_Complete"
+  ],
+  "total_features": 31
+}

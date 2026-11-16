@@ -1,0 +1,22 @@
+{
+  "specification_name": "Spec_C_Scenario_Estimation",
+  "description": "Interactive scenario simulation under user-specified climate adjustments and nutrient management options.",
+  "target": "Estimated_Yield",
+  "categorical_features": [
+    "Region",
+    "Crop",
+    "Soil Type"
+  ],
+  "user_controllable_inputs": [
+    "Delta_Temperature",
+    "Delta_Rainfall",
+    "Nitrogen_Application",
+    "Phosphorus_Application",
+    "Potassium_Application"
+  ],
+  "reference_inputs": [
+    "Hist_Region_Crop_Median",
+    "Soil Type",
+    "pH"
+  ]
+}

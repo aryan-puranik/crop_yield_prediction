@@ -1,0 +1,34 @@
+{
+  "specification_name": "Spec_B2_Predicted_Climate_Yield",
+  "description": "Next-year yield forecasting replacing origin climate levels with predicted climate outputs from Spec B1.",
+  "target": "Target_Yield",
+  "target_year": "Target_Year",
+  "categorical_features": [
+    "Region",
+    "Crop",
+    "Soil Type"
+  ],
+  "numerical_features": [
+    "Year",
+    "Is_Post_1990",
+    "Predicted_Temperature",
+    "Predicted_Rainfall",
+    "Predicted_Humidity",
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Pesticide",
+    "NPK_Total",
+    "N_P_Ratio",
+    "Yield_Lag1",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Change_5Y",
+    "Yield_Trend_Velocity",
+    "Hist_Region_Crop_Median",
+    "Yield_Relative_Index",
+    "History_Lag1_Available",
+    "History_3yr_Complete"
+  ]
+}

@@ -1,0 +1,32 @@
+Feature_Name,Group,Data_Type,Availability,Provenance,Missingness_Policy,Selection_Status,Rationale
+Region,G1_Geography,Categorical,Known at origin t,District/Crop Survey Key,Zero missing values,Retained,Fundamental crop and spatial categorical grouping.
+Crop,G1_Geography,Categorical,Known at origin t,District/Crop Survey Key,Zero missing values,Retained,Fundamental crop and spatial categorical grouping.
+Soil Type,G1_Geography,Categorical,Known at origin t,District/Crop Survey Key,Zero missing values,Retained,Fundamental crop and spatial categorical grouping.
+Year,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Is_Post_1990,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Temperature,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Rainfall,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Humidity,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Temperature_Anomaly,G4_Climate_Anomalies,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Rainfall_Anomaly,G4_Climate_Anomalies,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Humidity_Anomaly,G4_Climate_Anomalies,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+pH,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Nitrogen,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Phosphorus,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Potassium,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Pesticide,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+NPK_Total,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+N_P_Ratio,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Rain_Temp_Ratio,G5_Agronomic,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Lag1,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Lag2,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Lag3,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Lag5,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Rolling3,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Rolling3_Std,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Change_5Y,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Trend_Velocity,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Hist_Region_Crop_Median,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+Yield_Relative_Index,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
+History_Lag1_Available,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Median imputation with availability flag,Retained,Non-collinear predictor with verified descriptive validity.
+History_3yr_Complete,G2_Yield_History,Numerical,Known at origin t,Historical harvest/climate panel,Zero missing values,Retained,Non-collinear predictor with verified descriptive validity.
