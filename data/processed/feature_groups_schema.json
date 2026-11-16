@@ -1,0 +1,45 @@
+{
+  "G1_Geography": [
+    "Region",
+    "Crop",
+    "Soil Type"
+  ],
+  "G2_Yield_History": [
+    "Yield_Lag1",
+    "Yield_Lag2",
+    "Yield_Lag3",
+    "Yield_Lag5",
+    "Yield_Rolling3",
+    "Yield_Rolling3_Std",
+    "Yield_Rolling5",
+    "Yield_Change_5Y",
+    "Yield_Trend_Velocity",
+    "Yield_Relative_Index"
+  ],
+  "G3_Origin_Climate": [
+    "Temperature",
+    "Rainfall",
+    "Humidity"
+  ],
+  "G4_Climate_Anomalies": [
+    "Temperature_Anomaly",
+    "Rainfall_Anomaly",
+    "Humidity_Anomaly"
+  ],
+  "G5_Agronomic_Chemistry": [
+    "pH",
+    "Nitrogen",
+    "Phosphorus",
+    "Potassium",
+    "Fertilizer",
+    "Pesticide",
+    "NPK_Total",
+    "N_P_Ratio"
+  ],
+  "G6_Meta_Flags": [
+    "History_Lag1_Available",
+    "History_3yr_Complete",
+    "History_5yr_Complete",
+    "Is_Post_1990"
+  ]
+}
