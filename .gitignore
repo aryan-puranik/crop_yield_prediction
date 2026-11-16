@@ -73,3 +73,5 @@ data/interim/*
 # Local scratch and logs
 scratch/
 *.log
+
+structure.jpeg
