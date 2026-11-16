@@ -1,0 +1,24 @@
+{
+  "problem_formulation": "Next-year crop yield forecasting (t+1)",
+  "target_variable": "Target_Yield",
+  "target_year_variable": "Target_Year",
+  "origin_year_variable": "Year",
+  "partitions": {
+    "training": {
+      "target_years": "1967-2011",
+      "origin_years": "1966-2010",
+      "record_count": 164915
+    },
+    "validation": {
+      "target_years": "2012-2014",
+      "origin_years": "2011-2013",
+      "record_count": 10610
+    },
+    "test": {
+      "target_years": "2015-2017",
+      "origin_years": "2014-2016",
+      "record_count": 10160
+    }
+  },
+  "provenance": "Exact calendar year joins (Year + 1) avoiding 7,355 multi-year gap errors"
+}
